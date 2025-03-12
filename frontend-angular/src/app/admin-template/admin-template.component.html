@@ -3,8 +3,8 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span class="spacer"></span>
-  <button mat-button>Home</button>
-  <button mat-button>Profile</button>
+  <button mat-button routerLink="/home">Home</button>
+  <button mat-button routerLink="/profile">Profile</button>
   <button mat-button [matMenuTriggerFor]="importMenu" >
     <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
     Import
@@ -13,26 +13,26 @@
     <button mat-menu-item>Load Students</button>
     <button mat-menu-item>Load Payments</button>
   </mat-menu>
-  <button mat-raised-button color="accent">Login</button>
+  <button mat-raised-button color="accent" routerLink="/login">Login</button>
 </mat-toolbar>
 
 <mat-drawer-container>
   <mat-drawer #drawer mode="side" position="start" opened="true">
     <mat-nav-list>
       <mat-list-item>
-        <button mat-button>
+        <button mat-button routerLink="/dashboard">
           <mat-icon>dashboard</mat-icon>
           Dashboard
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button>
+        <button mat-button routerLink="/students">
           <mat-icon>dashboard</mat-icon>
           Students
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button>
+        <button mat-button routerLink="/payments">
           <mat-icon>dashboard</mat-icon>
           Payments
         </button>

@@ -11,11 +11,23 @@ import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatMenu, MatMenuItem, MatMenuModule, MatMenuTrigger} from "@angular/material/menu";
 import {MatDrawerContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatListItem, MatNavList} from "@angular/material/list";
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { StudentsComponent } from './students/students.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminTemplateComponent
+    AdminTemplateComponent,
+    HomeComponent,
+    ProfileComponent,
+    LoginComponent,
+    DashboardComponent,
+    StudentsComponent,
+    PaymentsComponent
   ],
   imports: [
     BrowserModule,
