@@ -17,6 +17,10 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentsComponent } from './students/students.component';
 import { PaymentsComponent } from './payments/payments.component';
+import {MatCard, MatCardHeader, MatCardModule} from "@angular/material/card";
+import {MatDivider} from "@angular/material/divider";
+import { LoadStudentsComponent } from './load-students/load-students.component';
+import { LoadPaymentsComponent } from './load-payments/load-payments.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { PaymentsComponent } from './payments/payments.component';
     LoginComponent,
     DashboardComponent,
     StudentsComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    LoadStudentsComponent,
+    LoadPaymentsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,9 @@ import { PaymentsComponent } from './payments/payments.component';
     MatMenuModule,
     MatSidenavModule,
     MatListItem,
-    MatNavList
+    MatNavList,
+    MatCardModule,
+    MatDivider,
   ],
   providers: [
     provideAnimationsAsync()
