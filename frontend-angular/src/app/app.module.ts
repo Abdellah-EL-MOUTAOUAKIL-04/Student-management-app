@@ -24,6 +24,8 @@ import { LoadPaymentsComponent } from './load-payments/load-payments.component';
 import {MatTable, MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {MatFormField, MatInput} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
     MatPaginator,
     MatSort,
     MatSortHeader,
+    MatInput,
+    MatFormFieldModule,
   ],
   providers: [
     provideAnimationsAsync()
