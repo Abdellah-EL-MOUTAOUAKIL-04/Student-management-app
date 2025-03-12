@@ -21,6 +21,9 @@ import {MatCard, MatCardHeader, MatCardModule} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import { LoadStudentsComponent } from './load-students/load-students.component';
 import { LoadPaymentsComponent } from './load-payments/load-payments.component';
+import {MatTable, MatTableModule} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort, MatSortHeader} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -47,6 +50,10 @@ import { LoadPaymentsComponent } from './load-payments/load-payments.component';
     MatNavList,
     MatCardModule,
     MatDivider,
+    MatTableModule,
+    MatPaginator,
+    MatSort,
+    MatSortHeader,
   ],
   providers: [
     provideAnimationsAsync()
