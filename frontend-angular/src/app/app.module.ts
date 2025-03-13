@@ -26,6 +26,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatSortHeader,
     MatInput,
     MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideAnimationsAsync()
