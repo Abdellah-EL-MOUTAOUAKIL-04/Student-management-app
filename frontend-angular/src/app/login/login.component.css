@@ -6,4 +6,5 @@ mat-form-field {
   width:600px;
   justify-content: center;
   margin:auto;
+  max-width: 800px;
 }
