@@ -27,6 +27,8 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AuthGuard} from "./guards/auth.guard";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -60,9 +62,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatInput,
     MatFormFieldModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
