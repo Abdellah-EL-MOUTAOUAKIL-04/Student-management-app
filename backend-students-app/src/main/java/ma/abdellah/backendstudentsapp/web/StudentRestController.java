@@ -1,14 +1,22 @@
 package ma.abdellah.backendstudentsapp.web;
 
 import ma.abdellah.backendstudentsapp.entities.Payment;
+import ma.abdellah.backendstudentsapp.entities.PaymentStatus;
+import ma.abdellah.backendstudentsapp.entities.PaymentType;
 import ma.abdellah.backendstudentsapp.entities.Student;
 import ma.abdellah.backendstudentsapp.repository.PaymentRepository;
 import ma.abdellah.backendstudentsapp.repository.StudentRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class StudentRestController {
@@ -43,5 +51,28 @@ public class StudentRestController {
     @GetMapping("/students/{code}/payments")
     public List<Payment> findByStudentCode(@PathVariable String code){
         return paymentRepository.findByStudentCode(code);
+    }
+
+    @PostMapping(value = "/payments",consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Payment savePayment(@RequestParam MultipartFile file, LocalDate date, double amount, PaymentType type,String studentCode) throws IOException {
+        Student student = studentRepository.findById(studentCode).get();
+        Path path= Paths.get(System.getProperty("user.home"),"students-app-files","payments");
+        if(Files.notExists(path)){
+            Files.createDirectories(path);
+        }
+
+        String fileId= UUID.randomUUID().toString();
+        Path filePath=Paths.get(System.getProperty("user.home"),"students-app-files","payments",fileId+".pdf");
+        Files.copy(file.getInputStream(),filePath);
+
+        Payment payment=Payment.builder()
+                .type(type)
+                .amount(amount)
+                .date(date)
+                .student(student)
+                .status(PaymentStatus.CREATED)
+                .file(filePath.toUri().toString())
+                .build();
+        return paymentRepository.save(payment);
     }
 }
