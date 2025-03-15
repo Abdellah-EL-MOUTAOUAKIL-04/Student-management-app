@@ -54,8 +54,9 @@ public class StudentRestController {
     }
 
     @PostMapping(value = "/payments",consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file, LocalDate date, double amount, PaymentType type,String studentCode) throws IOException {
-        Student student = studentRepository.findById(studentCode).get();
+    public Payment savePayment(@RequestParam MultipartFile file,
+                               @RequestParam LocalDate date,@RequestParam  double amount,@RequestParam PaymentType type,@RequestParam String studentCode) throws IOException {
+        Student student = studentRepository.findByCode(studentCode);
         Path path= Paths.get(System.getProperty("user.home"),"students-app-files","payments");
         if(Files.notExists(path)){
             Files.createDirectories(path);
