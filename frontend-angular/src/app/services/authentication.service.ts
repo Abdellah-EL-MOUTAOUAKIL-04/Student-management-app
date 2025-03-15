@@ -15,7 +15,7 @@ export class AuthenticationService {
   public login(username:string,password:string){
     if(this.users[username] && password=="1234"){
       this.username=username;
-      this.roles=this.username[username];
+      this.roles=this.users[username];
       this.authenticated=true;
       return true;
     }else{
