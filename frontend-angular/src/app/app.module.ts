@@ -29,6 +29,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./guards/auth.guard";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthorizationGuard} from "./guards/authorization.guard";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserAnimationsModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AuthorizationGuard
   ],
   bootstrap: [AppComponent]
 })
