@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -75,5 +76,12 @@ public class StudentRestController {
                 .file(filePath.toUri().toString())
                 .build();
         return paymentRepository.save(payment);
+    }
+
+    @GetMapping(value = "/paymentFile/{paymentId}",produces = MediaType.APPLICATION_PDF_VALUE)
+    public byte[] getPaymentFile(@PathVariable Long paymentId) throws IOException {
+        Payment payment=paymentRepository.findById(paymentId).get();
+        String filePath=payment.getFile();
+        return Files.readAllBytes(Path.of(URI.create(filePath)));
     }
 }
