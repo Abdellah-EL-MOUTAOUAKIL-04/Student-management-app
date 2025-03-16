@@ -6,6 +6,7 @@ import ma.abdellah.backendstudentsapp.entities.PaymentType;
 import ma.abdellah.backendstudentsapp.entities.Student;
 import ma.abdellah.backendstudentsapp.repository.PaymentRepository;
 import ma.abdellah.backendstudentsapp.repository.StudentRepository;
+import ma.abdellah.backendstudentsapp.service.PaymentService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,10 +24,12 @@ import java.util.UUID;
 public class StudentRestController {
     private PaymentRepository paymentRepository;
     private StudentRepository studentRepository;
+    private PaymentService paymentService;
 
-    public StudentRestController(PaymentRepository paymentRepository, StudentRepository studentRepository) {
+    public StudentRestController(PaymentRepository paymentRepository, StudentRepository studentRepository, PaymentService paymentService) {
         this.paymentRepository = paymentRepository;
         this.studentRepository = studentRepository;
+        this.paymentService = paymentService;
     }
 
     @GetMapping("/payments")
@@ -56,26 +59,9 @@ public class StudentRestController {
 
     @PostMapping(value = "/payments",consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public Payment savePayment(@RequestParam MultipartFile file,
-                               @RequestParam LocalDate date,@RequestParam  double amount,@RequestParam PaymentType type,@RequestParam String studentCode) throws IOException {
-        Student student = studentRepository.findByCode(studentCode);
-        Path path= Paths.get(System.getProperty("user.home"),"students-app-files","payments");
-        if(Files.notExists(path)){
-            Files.createDirectories(path);
-        }
+                                LocalDate date,  double amount, PaymentType type, String studentCode) throws IOException {
 
-        String fileId= UUID.randomUUID().toString();
-        Path filePath=Paths.get(System.getProperty("user.home"),"students-app-files","payments",fileId+".pdf");
-        Files.copy(file.getInputStream(),filePath);
-
-        Payment payment=Payment.builder()
-                .type(type)
-                .amount(amount)
-                .date(date)
-                .student(student)
-                .status(PaymentStatus.CREATED)
-                .file(filePath.toUri().toString())
-                .build();
-        return paymentRepository.save(payment);
+        return paymentService.savePayment(file, date, amount, type, studentCode);
     }
 
     @GetMapping(value = "/paymentFile/{paymentId}",produces = MediaType.APPLICATION_PDF_VALUE)
