@@ -70,4 +70,11 @@ public class StudentRestController {
         String filePath=payment.getFile();
         return Files.readAllBytes(Path.of(URI.create(filePath)));
     }
+
+    @PutMapping("/payments/updateStatus/{paymentId}")
+    public Payment updatePaymentStatus(@RequestParam PaymentStatus status,@PathVariable Long paymentId){
+        Payment payment=paymentRepository.findById(paymentId).get();
+        payment.setStatus(status);
+        return paymentRepository.save(payment);
+    }
 }
