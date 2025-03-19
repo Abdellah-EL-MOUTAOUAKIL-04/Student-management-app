@@ -8,9 +8,12 @@ import ma.abdellah.backendstudentsapp.repository.PaymentRepository;
 import ma.abdellah.backendstudentsapp.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,4 +55,15 @@ public class PaymentService {
         return paymentRepository.save(payment);
     }
 
+    public Payment updatePaymentStatus( PaymentStatus status,  Long paymentId){
+        Payment payment=paymentRepository.findById(paymentId).get();
+        payment.setStatus(status);
+        return paymentRepository.save(payment);
+    }
+
+    public byte[] getPaymentFile(Long paymentId) throws IOException {
+        Payment payment=paymentRepository.findById(paymentId).get();
+        String filePath=payment.getFile();
+        return Files.readAllBytes(Path.of(URI.create(filePath)));
+    }
 }

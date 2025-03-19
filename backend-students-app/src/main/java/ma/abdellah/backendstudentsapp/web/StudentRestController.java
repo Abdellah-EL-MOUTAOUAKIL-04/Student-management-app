@@ -32,16 +32,6 @@ public class StudentRestController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/payments")
-    public List<Payment> allPayments() {
-        return paymentRepository.findAll();
-    }
-
-    @GetMapping("/payments/{id}")
-    public Payment findById(@PathVariable Long id){
-        return paymentRepository.findById(id).get();
-    }
-
     @GetMapping("/students")
     public List<Student> allStudents(){
         return studentRepository.findAll();
@@ -50,6 +40,22 @@ public class StudentRestController {
     @GetMapping("/students/{id}")
     public Student findById(@PathVariable String Id){
         return studentRepository.findById(Id).get();
+    }
+
+    @GetMapping("/studentsByProgramId")
+    public List<Student> getStudentsByProgramId(@RequestParam String programId){
+        return studentRepository.findByProgramId(programId);
+    }
+
+
+    @GetMapping("/payments")
+    public List<Payment> allPayments() {
+        return paymentRepository.findAll();
+    }
+
+    @GetMapping("/payments/{id}")
+    public Payment findById(@PathVariable Long id){
+        return paymentRepository.findById(id).get();
     }
 
     @GetMapping("/students/{code}/payments")
@@ -66,15 +72,25 @@ public class StudentRestController {
 
     @GetMapping(value = "/paymentFile/{paymentId}",produces = MediaType.APPLICATION_PDF_VALUE)
     public byte[] getPaymentFile(@PathVariable Long paymentId) throws IOException {
-        Payment payment=paymentRepository.findById(paymentId).get();
-        String filePath=payment.getFile();
-        return Files.readAllBytes(Path.of(URI.create(filePath)));
+        return paymentService.getPaymentFile(paymentId);
     }
 
     @PutMapping("/payments/updateStatus/{paymentId}")
     public Payment updatePaymentStatus(@RequestParam PaymentStatus status,@PathVariable Long paymentId){
-        Payment payment=paymentRepository.findById(paymentId).get();
-        payment.setStatus(status);
-        return paymentRepository.save(payment);
+        return paymentService.updatePaymentStatus(status,paymentId);
     }
+
+    @GetMapping("/payments/byType")
+    public List<Payment> paymentsByType(@RequestParam PaymentType type){
+        return paymentRepository.findByType(type);
+    }
+
+    @GetMapping("/payments/byStatus")
+    public List<Payment> paymentsByStatus(@RequestParam PaymentStatus status){
+        return paymentRepository.findByStatus(status);
+    }
+
+
+
+
 }

@@ -12,6 +12,7 @@ public class Student {
     private String id;
     @Column(unique=true)
     private String code;
+    private String programId;
     private String firstName;
     private String lastName;
     private String email;

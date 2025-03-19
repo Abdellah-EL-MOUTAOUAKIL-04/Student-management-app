@@ -24,9 +24,9 @@ public class BackendStudentsAppApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(StudentRepository studentRepository, PaymentRepository paymentRepository) {
 		return args -> {
-			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112233").firstName("Abdellah").build());
-			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112244").firstName("Ahmed").build());
-			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112255").firstName("Zahra").build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112233").firstName("Abdellah").programId("BDCC").build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112244").firstName("Ahmed").programId("GLSID").build());
+			studentRepository.save(Student.builder().id(UUID.randomUUID().toString()).code("112255").firstName("Zahra").programId("SDIA").build());
 
 			PaymentType[] paymentTypes = PaymentType.values();
 			Random random=new Random();
