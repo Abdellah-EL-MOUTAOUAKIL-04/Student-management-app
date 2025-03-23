@@ -9,7 +9,7 @@ import {
 import {Injectable} from "@angular/core";
 import {AuthenticationService} from "../services/authentication.service";
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class AuthGuard {
   constructor(private authService:AuthenticationService,private router:Router) {
   }

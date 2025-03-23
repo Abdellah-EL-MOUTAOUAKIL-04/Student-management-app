@@ -1,6 +1,7 @@
 package ma.abdellah.backendstudentsapp;
 
 import ma.abdellah.backendstudentsapp.entities.Payment;
+import ma.abdellah.backendstudentsapp.entities.PaymentStatus;
 import ma.abdellah.backendstudentsapp.entities.PaymentType;
 import ma.abdellah.backendstudentsapp.entities.Student;
 import ma.abdellah.backendstudentsapp.repository.PaymentRepository;
@@ -38,6 +39,7 @@ public class BackendStudentsAppApplication {
 							.amount(1000+(int)(Math.random()*1000))
 							.date(LocalDate.now())
 							.type(paymentTypes[index])
+							.status(PaymentStatus.CREATED)
 							.file(UUID.randomUUID().toString())
 							.student(st)
 							.build();

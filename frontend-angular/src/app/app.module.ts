@@ -22,14 +22,15 @@ import {MatDivider} from "@angular/material/divider";
 import { LoadStudentsComponent } from './load-students/load-students.component';
 import { LoadPaymentsComponent } from './load-payments/load-payments.component';
 import {MatTable, MatTableModule} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
+import {MatSort, MatSortHeader, MatSortModule} from "@angular/material/sort";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./guards/auth.guard";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthorizationGuard} from "./guards/authorization.guard";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -57,13 +58,15 @@ import {AuthorizationGuard} from "./guards/authorization.guard";
     MatCardModule,
     MatDivider,
     MatTableModule,
-    MatPaginator,
-    MatSort,
+    MatPaginatorModule,
+    MatSortModule,
     MatSortHeader,
     MatInput,
     MatFormFieldModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [
     AuthGuard,
