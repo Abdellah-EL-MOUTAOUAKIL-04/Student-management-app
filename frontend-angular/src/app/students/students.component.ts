@@ -13,8 +13,8 @@ import {Student} from "../model/students.model";
 })
 export class StudentsComponent implements OnInit,AfterViewInit {
   public students !: Array<Student>;
-  public dataSource:any;
-  public displayedColumns=["id","firstName","lastName","payments"];
+  public studentDataSource!:MatTableDataSource<Student>;
+  public displayedColumns=["id","firstName","lastName","code","programId"];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,7 +27,7 @@ export class StudentsComponent implements OnInit,AfterViewInit {
     this.studentService.getStudents().subscribe({
         next:data => {
           this.students=data;
-          this.dataSource=new MatTableDataSource(this.students);
+          this.studentDataSource=new MatTableDataSource(this.students);
         },
         error:err=> {
           console.log(err);
@@ -35,13 +35,13 @@ export class StudentsComponent implements OnInit,AfterViewInit {
       });
     }
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort=this.sort;
+    this.studentDataSource.paginator = this.paginator;
+    this.studentDataSource.sort=this.sort;
   }
 
   filterStudents(event: Event) {
     let value=(event.target as HTMLInputElement).value;
-    this.dataSource.filter=value
+    this.studentDataSource.filter=value
   }
 
   getPayments(student:any) {

@@ -10,7 +10,20 @@
         <input matInput (change)="filterStudents($event)">
       </mat-form-field>
 
-      <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z1">
+     <!--
+     //en cas si on veut pas utiliser angular material
+     @for (student of students;track student){
+        <tr>
+          <td>{{student.id}}</td>
+          <td>{{student.firstName}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.programId}}</td>
+        </tr>
+      }
+      -->
+
+
+      <table mat-table matSort [dataSource]="studentDataSource" class="mat-elevation-z1">
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -27,6 +40,16 @@
           <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="programId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Program ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.programId}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="payments">
           <th mat-header-cell *matHeaderCellDef> Payments </th>
           <td mat-cell *matCellDef="let element">
@@ -41,7 +64,6 @@
                      showFirstLastButtons
                      aria-label="Select page of periodic elements">
       </mat-paginator>
-
 
     </mat-card-content>
   </mat-card>
