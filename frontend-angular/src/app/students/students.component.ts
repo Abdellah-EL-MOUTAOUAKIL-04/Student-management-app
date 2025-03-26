@@ -14,7 +14,7 @@ import {Student} from "../model/students.model";
 export class StudentsComponent implements OnInit,AfterViewInit {
   public students !: Array<Student>;
   public studentDataSource!:MatTableDataSource<Student>;
-  public displayedColumns=["id","firstName","lastName","code","programId"];
+  public displayedColumns=["id","firstName","lastName","code","programId","payments"];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -44,7 +44,7 @@ export class StudentsComponent implements OnInit,AfterViewInit {
     this.studentDataSource.filter=value
   }
 
-  getPayments(student:any) {
-    this.router.navigateByUrl("/payments");
+  studentPayments(student:any) {
+    this.router.navigateByUrl(`/admin/student-details/${student.code}`);
   }
 }
