@@ -1,5 +1,6 @@
 package ma.abdellah.backendstudentsapp.service;
 
+import ma.abdellah.backendstudentsapp.dtos.NewPaymentDTO;
 import ma.abdellah.backendstudentsapp.entities.Payment;
 import ma.abdellah.backendstudentsapp.entities.PaymentStatus;
 import ma.abdellah.backendstudentsapp.entities.PaymentType;
@@ -33,8 +34,8 @@ public class PaymentService {
         this.studentRepository = studentRepository;
     }
 
-    public Payment savePayment(MultipartFile file,LocalDate date, double amount, PaymentType type, String studentCode) throws IOException {
-        Student student = studentRepository.findByCode(studentCode);
+    public Payment savePayment(MultipartFile file, NewPaymentDTO newPaymentDTO) throws IOException {
+        Student student = studentRepository.findByCode(newPaymentDTO.getStudentCode());
         Path path= Paths.get(System.getProperty("user.home"),"students-app-files","payments");
         if(Files.notExists(path)){
             Files.createDirectories(path);
@@ -45,9 +46,9 @@ public class PaymentService {
         Files.copy(file.getInputStream(),filePath);
 
         Payment payment=Payment.builder()
-                .type(type)
-                .amount(amount)
-                .date(date)
+                .type(newPaymentDTO.getPaymentType())
+                .amount(newPaymentDTO.getAmount())
+                .date(newPaymentDTO.getDate())
                 .student(student)
                 .status(PaymentStatus.CREATED)
                 .file(filePath.toUri().toString())

@@ -1,5 +1,6 @@
 package ma.abdellah.backendstudentsapp.web;
 
+import ma.abdellah.backendstudentsapp.dtos.NewPaymentDTO;
 import ma.abdellah.backendstudentsapp.entities.Payment;
 import ma.abdellah.backendstudentsapp.entities.PaymentStatus;
 import ma.abdellah.backendstudentsapp.entities.PaymentType;
@@ -65,10 +66,9 @@ public class StudentRestController {
     }
 
     @PostMapping(value = "/payments",consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file,
-                                LocalDate date,  double amount, PaymentType type, String studentCode) throws IOException {
+    public Payment savePayment(@RequestParam("file") MultipartFile file, NewPaymentDTO newPaymentDTO) throws IOException {
 
-        return paymentService.savePayment(file, date, amount, type, studentCode);
+        return paymentService.savePayment(file,newPaymentDTO);
     }
 
     @GetMapping(value = "/paymentFile/{paymentId}",produces = MediaType.APPLICATION_PDF_VALUE)

@@ -34,6 +34,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { NewPaymentComponent } from './new-payment/new-payment.component';
 import { MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     HttpClientModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     AuthGuard,
