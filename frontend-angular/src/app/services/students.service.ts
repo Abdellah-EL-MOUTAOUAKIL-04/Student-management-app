@@ -26,4 +26,8 @@ export class StudentsService {
   public savePayment(formData:any):Observable<Payment>{
     return this.http.post<Payment>(`${environment.backendHost}/payments`,formData);
   }
+  public getPaymentDetails(id:number){
+    return this.http.get<Payment>(`${environment.backendHost}/payments/${id}/file`,
+      {responseType:'blob'});
+  }
 }
