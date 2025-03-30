@@ -18,17 +18,13 @@ export class PaymentDetailsComponent implements OnInit{
       (response)=>{
         const blob = new Blob([response], { type: 'application/pdf' });
         this.pdfFileUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = this.pdfFileUrl;
-        a.download = `payment-${this.paymentId}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(this.pdfFileUrl);
-        a.remove();
       },(error)=>{
         console.log(error);
       }
     );
   }
 
+  afterLoadComplete($event: any){
+
+  }
 }
